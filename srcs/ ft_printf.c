@@ -18,7 +18,7 @@ int     ft_printf(const char *s, ...)
                 return (1); // output error
         }
         else
-            s++;
+            ft_putchar_fd(*s++, 1);
     }
     va_end(ap);
     return (0);

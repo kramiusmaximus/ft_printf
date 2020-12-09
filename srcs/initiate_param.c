@@ -16,8 +16,8 @@ int     initiate_param(t_param *obj)
     obj->width = 0;
     obj->precision = 0;
     obj->precision_val = 0;
-    if (obj->length)
-    	free(obj->length);
+    /*if (obj->length)
+    	free(obj->length);*/
     obj->length = NULL;
     obj->type = 0;
     return (0);

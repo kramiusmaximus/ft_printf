@@ -10,5 +10,6 @@ char *process_percent(t_param *params)
 	res = malloc(sizeof(char) * 2); //     % + \0
 	ft_strlcpy(res, "%", 2);
 	res = add_precision(res, params);
-
+	res = add_width(res, params);
+	return (res);
 }

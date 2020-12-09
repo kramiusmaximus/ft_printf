@@ -4,7 +4,7 @@
 
 #include "ft_printft.h"
 
-char	*print(va_list ap, t_param *params)
+char	*print_main(va_list ap, t_param *params)
 {
 	char *res;
 
@@ -43,5 +43,11 @@ char	*print(va_list ap, t_param *params)
 			break ;
 		case ('n'):
 			break ;
+		default:
+			return (1);
 	}
+	if (!res)
+		return (1);
+	ft_putstr_fd(res, 1);
+	return (0);
 }
