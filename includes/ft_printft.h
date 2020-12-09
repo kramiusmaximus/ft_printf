@@ -26,10 +26,13 @@ int     ft_printf(const char *s, ...);
 char    *process_arg(char *s, va_list ap);
 int     initiate_param(t_param *obj);
 char    *parse(char *s, va_list ap, t_param *params);
-char 	*print_main(va_list ap, t_param *params);
+int 	print_main(va_list ap, t_param *params);
 char	*process_percent(t_param *params);
+char	*process_s(va_list ap, t_param *params);
+char	*process_c(va_list ap, t_param *params);
 char	*add_precision(char *res, t_param *params);
 char	*add_width(char *res, t_param *params);
+char	*process_p(va_list ap, t_param *params);
 
 
 

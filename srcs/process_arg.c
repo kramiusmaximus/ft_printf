@@ -9,6 +9,6 @@ char    *process_arg(char *s, va_list ap)
 
     initiate_param(&params);
     s = parse(s, ap, &params);   // process error case
-    s = print_main(ap, &params);           // process error case
+    print_main(ap, &params);           // process error case
     return (s);
 }

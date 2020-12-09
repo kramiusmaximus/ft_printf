@@ -4,7 +4,7 @@
 
 #include "ft_printft.h"
 
-char	*print_main(va_list ap, t_param *params)
+int	print_main(va_list ap, t_param *params)
 {
 	char *res;
 
@@ -33,10 +33,13 @@ char	*print_main(va_list ap, t_param *params)
 		case ('o'):
 			break ;
 		case ('s'):
+			res = process_s(ap, params);
 			break ;
 		case ('c'):
+			res = process_c(ap, params);
 			break ;
 		case ('p'):
+			res = process_p(ap, params);
 			break ;
 		case ('a'):
 		case ('A'):

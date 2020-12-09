@@ -41,27 +41,29 @@ char    *parse(char *s, va_list ap, t_param *params)
     }
     if (len > 0)
         params->width = ft_atoi(ft_substr(ptr, 0, len));
+    else if (*s == '*')
+	{
+		params->width = va_arg(ap, int);
+		s++;
+	}
     if (*s == '.')
     {
         params->precision = 1;
         s++;
         ptr = s;
         len = 0;
-        if (*s == '*')
+		while (ft_isdigit(*s))
 		{
-        	params->precision_val = va_arg(ap, int);
+			len++;
 			s++;
-        }
-        else
-        {
-            while (ft_isdigit(*s))
-            {
-                len++;
-                s++;
-            }
-            if (len > 0)
-                params->precision_val = ft_atoi(ft_substr(ptr, 0, len));
-        }
+		}
+		if (len > 0)
+			params->precision_val = ft_atoi(ft_substr(ptr, 0, len));
+		else if (*s == '*')
+		{
+			params->precision_val = va_arg(ap, int);
+			s++;
+		}
     }
     while (ft_strchr("hlLzjt", *s))
     {

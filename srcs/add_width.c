@@ -21,15 +21,14 @@ char *add_width(char *res, t_param *params)
 	if (params->minus)
 	{
 		ft_memcpy(res, tmp, len); // potential for error
-		res = ft_memset(res + len, c, bufflen);
+		ft_memset(res + len, c, bufflen);
 	}
 	else
 	{
 		if (params->zero)
 			c = '0';
-		res = ft_memset(res, c, bufflen);
+		ft_memset(res, c, bufflen);
 		ft_memcpy(res + bufflen, tmp, len); // potential for error
 	}
-	free(tmp);
 	return (res);
 }

@@ -28,8 +28,7 @@ char	*add_precision(char *res, t_param *params)
 			tmp = res;
 			res = ft_calloc(bufflen + ft_strlen(res) + 1, 1);
 			res = ft_memset(res, '0', bufflen);
-			res = ft_memcpy(res + bufflen
-					, tmp, ft_strlen(res));
+			res = ft_memcpy(res + bufflen, tmp, ft_strlen(res));
 			free(tmp);
 		}
 	}
