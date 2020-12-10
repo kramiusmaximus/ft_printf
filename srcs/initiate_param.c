@@ -1,7 +1,7 @@
 //
 // Created by Prestayn Felipa on 12/7/20.
 //
-#include "ft_printft.h"
+#include "ft_printf.h"
 
 int     initiate_param(t_param *obj)
 {

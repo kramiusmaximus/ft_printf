@@ -2,7 +2,7 @@
 // Created by Prestayn Felipa on 12/8/20.
 //
 
-#include "ft_printft.h"
+#include "ft_printf.h"
 
 int	print_main(va_list ap, t_param *params)
 {
@@ -15,6 +15,7 @@ int	print_main(va_list ap, t_param *params)
 			break ;
 		case ('d'):
 		case ('i'):
+			res = process_i(ap, params);
 			break ;
 		case ('u'):
 			break ;
@@ -29,6 +30,7 @@ int	print_main(va_list ap, t_param *params)
 			break ;
 		case ('x'):
 		case ('X'):
+			res = add_precision_x(ap, params);
 			break ;
 		case ('o'):
 			break ;

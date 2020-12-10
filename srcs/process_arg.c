@@ -1,7 +1,7 @@
 //
 // Created by Prestayn Felipa on 12/7/20.
 //
-#include "ft_printft.h"
+#include "ft_printf.h"
 
 char    *process_arg(char *s, va_list ap)
 {

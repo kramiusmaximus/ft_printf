@@ -2,7 +2,7 @@
 // Created by Prestayn Felipa on 12/9/20.
 //
 
-#include "ft_printft.h"
+#include "ft_printf.h"
 
 char *add_width(char *res, t_param *params)
 {
