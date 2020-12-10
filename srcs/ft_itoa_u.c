@@ -30,42 +30,39 @@ static char			*ft_revstring(char *s)
 	return (s);
 }
 
-static int			ft_ndigits(int n, char *base)
+static int			ft_ndigits(unsigned int n)
 {
 	int		res;
-	int		baselen;
 	long	x;
 
-	baselen = ft_strlen(base);
 	x = (long)n;
 	res = 1;
 	if (x < 0)
 		return (8);
-	while (x > baselen - 1)
+	while (x > 9)
 	{
-		x /= baselen;
+		x /= 10;
 		res++;
 	}
 	return (res);
 }
 
-char				*ft_itoa_x(unsigned int n)
+char				*ft_itoa_u(unsigned int n)
 {
 	char	*res;
 	char	*ptr;
 	long	pos;
 	char	*base;
 
-	base = "0123456789abcdef";
-	if (!(res = ft_calloc(ft_ndigits(n, base) + 1, sizeof(char))))
+	if (!(res = ft_calloc(ft_ndigits(n) + 1, sizeof(char))))
 		return (NULL);
 	ptr = res;
 	pos = (n < 0) ? -(long)n : (long)n;
 	*ptr = '0';
 	while (pos > 0)
 	{
-		*ptr = base[pos % 16];
-		pos /= 16;
+		*ptr = pos % 10 + '0';
+		pos /= 10;
 		ptr++;
 	}
 	res = ft_revstring(res);

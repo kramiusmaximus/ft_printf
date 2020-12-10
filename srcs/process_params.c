@@ -4,20 +4,21 @@
 
 #include "ft_printf.h"
 
-int	print_main(va_list ap, t_param *params)
+int	process_params(va_list ap, t_param *params)
 {
 	char *res;
 
 	switch (params->type)
 	{
 		case ('%'):  // just prints % without any flags
-			res = process_percent(params);
+			res = convert_percent(params);
 			break ;
 		case ('d'):
 		case ('i'):
-			res = process_i(ap, params);
+			res = convert_i(ap, params);
 			break ;
 		case ('u'):
+			res = convert_u(ap, params);
 			break ;
 		case ('f'):
 		case ('F'):
@@ -29,24 +30,19 @@ int	print_main(va_list ap, t_param *params)
 		case ('G'):
 			break ;
 		case ('x'):
+			res = convert_x(ap, params);
+			break;
 		case ('X'):
-			res = add_precision_x(ap, params);
-			break ;
-		case ('o'):
+			res = convert_xx(ap, params);
 			break ;
 		case ('s'):
-			res = process_s(ap, params);
+			res = convert_s(ap, params);
 			break ;
 		case ('c'):
-			res = process_c(ap, params);
+			res = convert_c(ap, params);
 			break ;
 		case ('p'):
-			res = process_p(ap, params);
-			break ;
-		case ('a'):
-		case ('A'):
-			break ;
-		case ('n'):
+			res = convert_p(ap, params);
 			break ;
 		default:
 			return (1);

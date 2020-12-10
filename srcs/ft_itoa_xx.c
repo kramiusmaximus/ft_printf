@@ -1,7 +1,11 @@
+//
+// Created by Prestayn Felipa on 12/10/20.
+//
+
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_itoa_x.c                                        :+:      :+:    :+:   */
+/*   ft_itoa_base.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pfelipa <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -49,14 +53,14 @@ static int			ft_ndigits(int n, char *base)
 	return (res);
 }
 
-char				*ft_itoa_x(unsigned int n)
+char				*ft_itoa_xx(unsigned int n)
 {
 	char	*res;
 	char	*ptr;
 	long	pos;
 	char	*base;
 
-	base = "0123456789abcdef";
+	base = "0123456789ABCDEF";
 	if (!(res = ft_calloc(ft_ndigits(n, base) + 1, sizeof(char))))
 		return (NULL);
 	ptr = res;
@@ -71,4 +75,3 @@ char				*ft_itoa_x(unsigned int n)
 	res = ft_revstring(res);
 	return (res);
 }
-

@@ -3,7 +3,7 @@
 //
 #include "ft_printf.h"
 
-char *process_percent(t_param *params)
+char *convert_percent(t_param *params)
 {
 	char *res;
 

@@ -26,19 +26,29 @@ int     ft_printf(const char *s, ...);
 char    *process_arg(char *s, va_list ap);
 int     initiate_param(t_param *obj);
 char    *parse(char *s, va_list ap, t_param *params);
-int 	print_main(va_list ap, t_param *params);
+int 	process_params(va_list ap, t_param *params);
 
-char	*process_percent(t_param *params);
-char	*process_s(va_list ap, t_param *params);
-char	*process_c(va_list ap, t_param *params);
-char	*process_p(va_list ap, t_param *params);
-char	*process_i(va_list ap, t_param *params);
+char	*convert_percent(t_param *params);
+char	*convert_s(va_list ap, t_param *params);
+char	*convert_c(va_list ap, t_param *params);
+char	*convert_p(va_list ap, t_param *params);
+char	*convert_i(va_list ap, t_param *params);
+char	*convert_x(va_list ap, t_param *params);
+char	*convert_xx(va_list ap, t_param *params);
+char	*convert_u(va_list ap, t_param *params);
 
 char	*add_precision_main(char *res, t_param *params);
 char	*add_precision_s(char *res, int precision);
 char 	*add_precision_i(char *res, int precision);
+char	*add_precision_o(char *res, int precision);
 
 char	*add_width(char *res, t_param *params);
+char	*ft_itoa_x(unsigned int n);
+char	*ft_itoa_xx(unsigned int n);
+char	*ft_itoa_u(unsigned int i);
+char	*ft_itoa_p(long n);
+
+
 
 
 

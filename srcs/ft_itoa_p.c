@@ -1,7 +1,10 @@
+//
+// Created by Prestayn Felipa on 12/10/20.
+//
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_itoa_x.c                                        :+:      :+:    :+:   */
+/*   ft_itoa_p.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pfelipa <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -30,26 +33,24 @@ static char			*ft_revstring(char *s)
 	return (s);
 }
 
-static int			ft_ndigits(int n, char *base)
+static long			ft_ndigits(long n, char *base)
 {
-	int		res;
-	int		baselen;
-	long	x;
+	long		res;
+	long		baselen;
 
 	baselen = ft_strlen(base);
-	x = (long)n;
 	res = 1;
-	if (x < 0)
+	if (n < 0)
 		return (8);
-	while (x > baselen - 1)
+	while (n > baselen - 1)
 	{
-		x /= baselen;
+		n /= baselen;
 		res++;
 	}
 	return (res);
 }
 
-char				*ft_itoa_x(unsigned int n)
+char				*ft_itoa_p(long n)
 {
 	char	*res;
 	char	*ptr;
@@ -57,7 +58,7 @@ char				*ft_itoa_x(unsigned int n)
 	char	*base;
 
 	base = "0123456789abcdef";
-	if (!(res = ft_calloc(ft_ndigits(n, base) + 1, sizeof(char))))
+	if (!(res = ft_calloc(ft_ndigits(n, base) + 3, sizeof(char))))
 		return (NULL);
 	ptr = res;
 	pos = (n < 0) ? -(long)n : (long)n;
@@ -68,7 +69,9 @@ char				*ft_itoa_x(unsigned int n)
 		pos /= 16;
 		ptr++;
 	}
+	if (!n)
+		ptr++;
+	ft_strlcpy(ptr, "x0", 3);
 	res = ft_revstring(res);
 	return (res);
 }
-

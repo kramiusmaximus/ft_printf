@@ -4,12 +4,11 @@
 
 #include "ft_printf.h"
 
-char *process_c(va_list ap, t_param *params)
+char *convert_p(va_list ap, t_param *params)
 {
 	char *res;
 
-	res = ft_calloc(2, 1);
-	res[0] = va_arg(ap, int);
+	res = ft_itoa_p(va_arg(ap, long));
 	res = add_precision_main(res, params);
 	res = add_width(res, params);
 	return (res);
