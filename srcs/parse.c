@@ -3,73 +3,73 @@
 //
 #include "ft_printf.h"
 
-char    *parse(char *s, va_list ap, t_param *params)
+const char    *parse(t_param *params)
 {
-    char    *ptr;
+    const char    *ptr;
     int     len = 0;
 
-    while (ft_strchr("-+ 0'#", *s))
+    while (ft_strchr("-+ 0'#", *params->s))
     {
-        switch (*s)
+        switch (*params->s)
         {
             case ('-'):
-                params->minus = 1;
+                params->flags = params->flags | F_MINUS;
                 break;
             case ('+'):
-                params->plus = 1;
+                params->flags = params->flags | F_PLUS;
                 break;
             case (' '):
-                params->space = 1;
+                params->flags = params->flags | F_SPACE;
                 break;
             case ('0'):
-                params->zero = 1;
+                params->flags = params->flags | F_ZERO;
                 break;
             case ('\''):
-                params->apostrophe = 1;
+                params->flags = params->flags | F_APOSTROPHE;
                 break;
             case ('#'):
-                params->hash = 1;
+                params->flags = params->flags | F_HASH;
                 break;
         }
-        s++;
+		(params->s)++;
     }
-    ptr = s;
-    while (ft_isdigit(*s))
+    ptr = params->s;
+    while (ft_isdigit(*params->s))
     {
         len++;
-        s++;
+		(params->s)++;
     }
     if (len > 0)
         params->width = ft_atoi(ft_substr(ptr, 0, len));
-    else if (*s == '*')
+    else if (*params->s == '*')
 	{
-		params->width = va_arg(ap, int);
-		s++;
+		params->width = va_arg(params->ap, int);
+		(params->s)++;
 	}
-    if (*s == '.')
+    if (*params->s == '.')
     {
-        params->precision = 1;
-        s++;
-        ptr = s;
+        params->flags = params->flags | F_PRECISION;
+		(params->s)++;
+        ptr = params->s;
         len = 0;
-		while (ft_isdigit(*s))
+		while (ft_isdigit(*params->s))
 		{
 			len++;
-			s++;
+			(params->s)++;
 		}
 		if (len > 0)
 			params->precision_val = ft_atoi(ft_substr(ptr, 0, len));
-		else if (*s == '*')
+		else if (*params->s == '*')
 		{
-			params->precision_val = va_arg(ap, int);
-			s++;
+			params->precision_val = va_arg(params->ap, int);
+			params->s++;
 		}
     }
-    while (ft_strchr("hlLzjt", *s))
+    while (ft_strchr("hlLzjt", *params->s))
     {
-        s++;	// bonus
+		params->s++;	// bonus
     }
-    if (ft_strchr("cspdiuxX%nfge", *s))
-        params->type = *s++;
-    return (s);
+    if (ft_strchr("cspdiuxX%nfge", *params->s))
+        params->type = *(params->s)++;
+    return (params->s);
 }

@@ -10,25 +10,33 @@ char *add_width(char *res, t_param *params)
 	int		len;
 	int		bufflen;
 	char	c;
+	int		neg;
 
-	len = ft_strlen(res);
-	bufflen = params->width - len;
+	if (params->type == 'c')
+		len = 1;
+	else
+		len = ft_strlen(res);
+	bufflen = ABS(params->width) - len;
 	if (bufflen < 1)
 		return (res);
 	tmp = res;
-	res = ft_calloc(params->width + 1, 1);
+	res = ft_calloc(ABS(params->width) + 1, 1);
 	c = ' ';
-	if (params->minus)
+	if ((params->flags & F_MINUS) || params->width < 0)
 	{
+		len = *tmp ? len : 0;
 		ft_memcpy(res, tmp, len); // potential for error
 		ft_memset(res + len, c, bufflen);
 	}
 	else
 	{
-		if (params->zero)
+		if ((params->flags & F_ZERO) && (!(params->flags & F_PRECISION) || params->precision_val < 0))
 			c = '0';
-		ft_memset(res, c, bufflen);
-		ft_memcpy(res + bufflen, tmp, len); // potential for error
+		neg = *tmp == '-' && c == '0' ? 1 : 0;
+		if (neg)
+			res[0] = '-';
+		ft_memset(res + neg, c, bufflen);
+		ft_memcpy(res + bufflen + neg, tmp + neg, len); // potential for error
 	}
 	return (res);
 }

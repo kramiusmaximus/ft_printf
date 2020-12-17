@@ -4,38 +4,53 @@
 
 #ifndef FT_PRINTF_FT_PRINTF_H
 #define FT_PRINTF_FT_PRINTF_H
-#define MAX(a, b) a >= b ? a : b
+#define MAX(a, b) (a >= b ? a : b)
+#define ABS(a)	(a < 0 ? -1 * a : a)
+#define F_MINUS       (0b00000001)
+#define F_PLUS        (0b00000010)
+#define F_SPACE       (0b00000100)
+#define F_ZERO  	  (0b00001000)
+#define F_APOSTROPHE  (0b00010000)
+#define F_HASH		  (0b00100000)
+#define F_PRECISION	  (0b01000000)
+
 #include "libft.h"
 #include <stdarg.h>
 typedef struct  s_param
 {
+	va_list		ap;
+	const char 	*s;
+	int 		out;
+	char 		flags;
+	/*
     char		minus;
     char		plus;
     char		space;
     char		zero;
     char		apostrophe;
     char		hash;
+	char		precision;
+    */
     int			width;
-    char		precision;
     int			precision_val;
     char		*length;
     char		type;
 }				t_param;
 
 int     ft_printf(const char *s, ...);
-char    *process_arg(char *s, va_list ap);
+const char    *process_arg(t_param *params);
 int     initiate_param(t_param *obj);
-char    *parse(char *s, va_list ap, t_param *params);
-int 	process_params(va_list ap, t_param *params);
+const char    *parse(t_param *params);
+int process_params(t_param *params);
 
 char	*convert_percent(t_param *params);
-char	*convert_s(va_list ap, t_param *params);
-char	*convert_c(va_list ap, t_param *params);
-char	*convert_p(va_list ap, t_param *params);
-char	*convert_i(va_list ap, t_param *params);
-char	*convert_x(va_list ap, t_param *params);
-char	*convert_xx(va_list ap, t_param *params);
-char	*convert_u(va_list ap, t_param *params);
+char *convert_s(t_param *params);
+char *convert_c(t_param *params);
+char *convert_p(t_param *params);
+char *convert_i(t_param *params);
+char *convert_x(t_param *params);
+char *convert_xx(t_param *params);
+char *convert_u(t_param *params);
 
 char	*add_precision_main(char *res, t_param *params);
 char	*add_precision_s(char *res, int precision);

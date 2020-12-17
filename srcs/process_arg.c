@@ -3,13 +3,11 @@
 //
 #include "ft_printf.h"
 
-char    *process_arg(char *s, va_list ap)
+const char    *process_arg(t_param *params)
 {
-    t_param   params;
-
-    initiate_param(&params);
-    s = parse(s, ap, &params);
-    if (s)
-		process_params(ap, &params);           // process error case
-    return (s);
+    initiate_param(params);
+    params->s = parse(params);
+    if (params->s)
+        process_params(params);           // process error case
+    return (params->s);
 }

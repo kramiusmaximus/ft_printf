@@ -9,12 +9,13 @@ char 	*add_precision_i(char *res, int precision)
 	int len;
 	char *tmp;
 	char neg;
-	char c;
 
 	// when precision flag is included,'0' spaces turn to ' ' for the zero flag
 	len = ft_strlen(res);
 	if ((neg = *res == '-' ? 1 : 0))
 		len--;
+	if (!ft_strncmp(res, "0", len) && precision == 0)
+		*res = 0;
 	if (precision > len)
 	{
 		tmp = res;

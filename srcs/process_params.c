@@ -4,51 +4,45 @@
 
 #include "ft_printf.h"
 
-int	process_params(va_list ap, t_param *params)
+
+
+int process_params(t_param *params)
 {
 	char *res;
 
 	switch (params->type)
 	{
-		case ('%'):  // just prints % without any flags
+		case ('%'):
 			res = convert_percent(params);
 			break ;
 		case ('d'):
 		case ('i'):
-			res = convert_i(ap, params);
+			res = convert_i(params);
 			break ;
 		case ('u'):
-			res = convert_u(ap, params);
-			break ;
-		case ('f'):
-		case ('F'):
-			break ;
-		case ('e'):
-		case ('E'):
-			break ;
-		case ('g'):
-		case ('G'):
+			res = convert_u(params);
 			break ;
 		case ('x'):
-			res = convert_x(ap, params);
+			res = convert_x(params);
 			break;
 		case ('X'):
-			res = convert_xx(ap, params);
+			res = convert_xx(params);
 			break ;
 		case ('s'):
-			res = convert_s(ap, params);
+			res = convert_s(params);
 			break ;
 		case ('c'):
-			res = convert_c(ap, params);
+			res = convert_c(params);
 			break ;
 		case ('p'):
-			res = convert_p(ap, params);
+			res = convert_p(params);
 			break ;
 		default:
 			return (1);
 	}
 	if (!res)
 		return (1);
+	params->out += ft_strlen(res);
 	ft_putstr_fd(res, 1);
 	return (0);
 }

@@ -52,7 +52,6 @@ char				*ft_itoa_u(unsigned int n)
 	char	*res;
 	char	*ptr;
 	long	pos;
-	char	*base;
 
 	if (!(res = ft_calloc(ft_ndigits(n) + 1, sizeof(char))))
 		return (NULL);

@@ -6,10 +6,7 @@
 
 char	*add_precision_main(char *res, t_param *params)
 {
-	char *tmp;
-	int bufflen;
-
-	if (!params->precision)
+	if (!(params->flags & F_PRECISION))
 		return (res);
 	if (params->type == 's')
 		res = add_precision_s(res, params->precision_val);
@@ -17,7 +14,7 @@ char	*add_precision_main(char *res, t_param *params)
 		res = add_precision_i(res, params->precision_val);
 	else if (params->type == 'f' || params->type == 'F')
 	{}
-	else
+	else if (params->type == '%')
 		res = add_precision_o(res, params->precision_val);
 	return (res);
 }
