@@ -71,4 +71,3 @@ char				*ft_itoa_x(unsigned int n)
 	res = ft_revstring(res);
 	return (res);
 }
-

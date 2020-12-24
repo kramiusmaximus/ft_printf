@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   convert_xx.c                                       :+:      :+:    :+:   */
+/*   parse_precision.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pfelipa <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,20 +12,29 @@
 
 #include "ft_printf.h"
 
-char	*convert_xx(t_param *params)
+void	parse_precision(t_param *params)
 {
-	char *res;
-	char *tmp;
+	const char	*ptr;
+	char		*precision_val;
 
-	res = ft_itoa_xx(va_arg(params->ap, unsigned int));
-	tmp = res;
-	if (params->flags & F_PRECISION)
-		res = add_precision_i(res, params);
-	if (tmp != res)
-		free(tmp);
-	tmp = res;
-	res = add_width(res, params);
-	if (tmp != res)
-		free(tmp);
-	return (res);
+	if (!params)
+		return ;
+	if (*params->s == '.')
+	{
+		params->flags = params->flags | F_PRECISION;
+		ptr = ++params->s;
+		while (ft_isdigit(*params->s))
+			params->s++;
+		if ((params->s - ptr > 0) && (precision_val =
+			ft_substr(ptr, 0, params->s - ptr)))
+		{
+			params->precision_val = ft_atoi(precision_val);
+			free(precision_val);
+		}
+		else if (*params->s == '*')
+		{
+			params->precision_val = va_arg(params->ap, int);
+			params->s++;
+		}
+	}
 }

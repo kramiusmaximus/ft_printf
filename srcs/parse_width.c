@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   convert_xx.c                                       :+:      :+:    :+:   */
+/*   parse_width.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pfelipa <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,20 +12,27 @@
 
 #include "ft_printf.h"
 
-char	*convert_xx(t_param *params)
+void	parse_width(t_param *params)
 {
-	char *res;
-	char *tmp;
+	const char	*ptr;
+	char		*width;
 
-	res = ft_itoa_xx(va_arg(params->ap, unsigned int));
-	tmp = res;
-	if (params->flags & F_PRECISION)
-		res = add_precision_i(res, params);
-	if (tmp != res)
-		free(tmp);
-	tmp = res;
-	res = add_width(res, params);
-	if (tmp != res)
-		free(tmp);
-	return (res);
+	if (!params)
+		return ;
+	ptr = params->s;
+	while (ft_isdigit(*params->s))
+		params->s++;
+	if (ptr != params->s)
+	{
+		if ((width = ft_substr(ptr, 0, params->s - ptr)))
+		{
+			params->width = ft_atoi(width);
+			free(width);
+		}
+	}
+	else if (*params->s == '*')
+	{
+		params->width = va_arg(params->ap, int);
+		params->s++;
+	}
 }

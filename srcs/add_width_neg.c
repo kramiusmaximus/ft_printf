@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   convert_xx.c                                       :+:      :+:    :+:   */
+/*   add_width_neg.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pfelipa <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,20 +12,17 @@
 
 #include "ft_printf.h"
 
-char	*convert_xx(t_param *params)
+void add_width_neg(t_param *params, char *res, int len, int bufflen, char *tmp)
 {
-	char *res;
-	char *tmp;
+	char c;
+	int neg;
 
-	res = ft_itoa_xx(va_arg(params->ap, unsigned int));
-	tmp = res;
-	if (params->flags & F_PRECISION)
-		res = add_precision_i(res, params);
-	if (tmp != res)
-		free(tmp);
-	tmp = res;
-	res = add_width(res, params);
-	if (tmp != res)
-		free(tmp);
-	return (res);
+	c = ' ';
+	if ((params->flags & F_ZERO) && (!(params->flags & F_PRECISION) || params->precision_val < 0))
+		c = '0';
+	neg = *tmp == '-' && c == '0' ? 1 : 0;
+	if (neg)
+		res[0] = '-';
+	ft_memset(res + neg, c, bufflen);
+	ft_memcpy(res + bufflen + neg, tmp + neg, len);
 }

@@ -16,7 +16,7 @@ $(NAME):					${OBJECTS}
 							ar rc $(NAME) $(OBJECTS)
 							ranlib $(NAME)
 
-%.o: %.c
+%.o: 						%.c
 							$(CC) $(CFLAGS) -Iincludes -Ilibft/includes -c -o $@ $<
 
 clean:

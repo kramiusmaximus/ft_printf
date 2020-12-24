@@ -1,29 +1,38 @@
-//
-// Created by Prestayn Felipa on 12/10/20.
-//
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   add_precision_i.c                                  :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: pfelipa <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/08/31 14:42:45 by pfelipa           #+#    #+#             */
+/*   Updated: 2020/09/02 18:56:32 by pfelipa          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "ft_printf.h"
 
-char 	*add_precision_i(char *res, int precision)
+char	*add_precision_i(char *res, t_param *params)
 {
-	int len;
-	char *tmp;
-	char neg;
+	int		len;
+	char	*tmp;
+	char	neg;
 
-	// when precision flag is included,'0' spaces turn to ' ' for the zero flag
+	if (!res || !params)
+		return (res);
 	len = ft_strlen(res);
 	if ((neg = *res == '-' ? 1 : 0))
 		len--;
-	if (!ft_strncmp(res, "0", len) && precision == 0)
+	if (!ft_strncmp(res, "0", len) && params->precision_val == 0)
 		*res = 0;
-	if (precision > len)
+	if (params->precision_val > len)
 	{
 		tmp = res;
-		res = ft_calloc(precision + neg + 1, 1);
+		res = ft_calloc(params->precision_val + neg + 1, 1);
 		if (neg)
 			res[0] = '-';
-		ft_memset(res + neg, '0', precision - len);
-		ft_memcpy(res + precision + neg - len, tmp + neg, len);
+		ft_memset(res + neg, '0', params->precision_val - len);
+		ft_memcpy(res + params->precision_val + neg - len, tmp + neg, len);
 	}
 	return (res);
 }

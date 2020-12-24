@@ -1,42 +1,38 @@
-//
-// Created by Prestayn Felipa on 12/9/20.
-//
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   add_width.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: pfelipa <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/08/31 14:42:45 by pfelipa           #+#    #+#             */
+/*   Updated: 2020/09/02 18:56:32 by pfelipa          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "ft_printf.h"
 
-char *add_width(char *res, t_param *params)
+char	*add_width(char *res, t_param *params)
 {
-	char	*tmp;
 	int		len;
 	int		bufflen;
-	char	c;
-	int		neg;
+	char	*tmp;
 
-	if (params->type == 'c')
-		len = 1;
-	else
-		len = ft_strlen(res);
+
+	if (!res || !params)
+		return (res);
+	len = ft_strlen(res);
 	bufflen = ABS(params->width) - len;
 	if (bufflen < 1)
 		return (res);
+	if (params->type == 'c' && !res[0])
+		bufflen--;
 	tmp = res;
-	res = ft_calloc(ABS(params->width) + 1, 1);
-	c = ' ';
+	if (!(res = ft_calloc(ABS(params->width) + 1, 1)))
+		return (NULL);
 	if ((params->flags & F_MINUS) || params->width < 0)
-	{
-		len = *tmp ? len : 0;
-		ft_memcpy(res, tmp, len); // potential for error
-		ft_memset(res + len, c, bufflen);
-	}
+		add_width_pos(res, len, bufflen, tmp);
 	else
-	{
-		if ((params->flags & F_ZERO) && (!(params->flags & F_PRECISION) || params->precision_val < 0))
-			c = '0';
-		neg = *tmp == '-' && c == '0' ? 1 : 0;
-		if (neg)
-			res[0] = '-';
-		ft_memset(res + neg, c, bufflen);
-		ft_memcpy(res + bufflen + neg, tmp + neg, len); // potential for error
-	}
+		add_width_neg(params, res, len, bufflen, tmp);
 	return (res);
 }

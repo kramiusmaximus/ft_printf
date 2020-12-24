@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   convert_xx.c                                       :+:      :+:    :+:   */
+/*   parse_flags.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pfelipa <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,20 +12,25 @@
 
 #include "ft_printf.h"
 
-char	*convert_xx(t_param *params)
+void	parse_flags(t_param *params)
 {
-	char *res;
-	char *tmp;
+	char c;
 
-	res = ft_itoa_xx(va_arg(params->ap, unsigned int));
-	tmp = res;
-	if (params->flags & F_PRECISION)
-		res = add_precision_i(res, params);
-	if (tmp != res)
-		free(tmp);
-	tmp = res;
-	res = add_width(res, params);
-	if (tmp != res)
-		free(tmp);
-	return (res);
+	c = *params->s;
+	while (ft_strchr("-+ 0'#", c))
+	{
+		if (c == '-')
+			params->flags = params->flags | F_MINUS;
+		else if (c == '+')
+			params->flags = params->flags | F_PLUS;
+		else if (c == ' ')
+			params->flags = params->flags | F_SPACE;
+		else if (c == '0')
+			params->flags = params->flags | F_ZERO;
+		else if (c == '\'')
+			params->flags = params->flags | F_APOSTROPHE;
+		else if (c == '#')
+			params->flags = params->flags | F_HASH;
+		c = *++params->s;
+	}
 }

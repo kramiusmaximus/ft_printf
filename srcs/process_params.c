@@ -1,48 +1,39 @@
-//
-// Created by Prestayn Felipa on 12/8/20.
-//
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   process_params.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: pfelipa <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/08/31 14:42:45 by pfelipa           #+#    #+#             */
+/*   Updated: 2020/09/02 18:56:32 by pfelipa          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "ft_printf.h"
 
-
-
-int process_params(t_param *params)
+char	*process_params(t_param *params)
 {
 	char *res;
+	char c;
 
-	switch (params->type)
-	{
-		case ('%'):
-			res = convert_percent(params);
-			break ;
-		case ('d'):
-		case ('i'):
-			res = convert_i(params);
-			break ;
-		case ('u'):
-			res = convert_u(params);
-			break ;
-		case ('x'):
-			res = convert_x(params);
-			break;
-		case ('X'):
-			res = convert_xx(params);
-			break ;
-		case ('s'):
-			res = convert_s(params);
-			break ;
-		case ('c'):
-			res = convert_c(params);
-			break ;
-		case ('p'):
-			res = convert_p(params);
-			break ;
-		default:
-			return (1);
-	}
-	if (!res)
-		return (1);
-	params->out += ft_strlen(res);
-	ft_putstr_fd(res, 1);
-	return (0);
+	res = NULL;
+	c = params->type;
+	if (c == '%')
+		res = convert_percent(params);
+	else if (c == 'd' || c == 'i')
+		res = convert_i(params);
+	else if (c == 'u')
+		res = convert_u(params);
+	else if (c == 'x')
+		res = convert_x(params);
+	else if (c == 'X')
+		res = convert_xx(params);
+	else if (c == 's')
+		res = convert_s(params);
+	else if (c == 'c')
+		res = convert_c(params);
+	else if (c == 'p')
+		res = convert_p(params);
+	return (res);
 }

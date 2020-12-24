@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   convert_xx.c                                       :+:      :+:    :+:   */
+/*   add_width_pos.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pfelipa <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,20 +12,8 @@
 
 #include "ft_printf.h"
 
-char	*convert_xx(t_param *params)
+void add_width_pos(char *res, int len, int bufflen, char *tmp)
 {
-	char *res;
-	char *tmp;
-
-	res = ft_itoa_xx(va_arg(params->ap, unsigned int));
-	tmp = res;
-	if (params->flags & F_PRECISION)
-		res = add_precision_i(res, params);
-	if (tmp != res)
-		free(tmp);
-	tmp = res;
-	res = add_width(res, params);
-	if (tmp != res)
-		free(tmp);
-	return (res);
+	ft_memcpy(res, tmp, len);
+	ft_memset(res + len, ' ', bufflen);
 }

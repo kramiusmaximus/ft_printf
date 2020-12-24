@@ -1,18 +1,23 @@
-//
-// Created by Prestayn Felipa on 12/7/20.
-//
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   initiate_params.c                                  :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: pfelipa <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/08/31 14:42:45 by pfelipa           #+#    #+#             */
+/*   Updated: 2020/09/02 18:56:32 by pfelipa          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ft_printf.h"
 
-int     initiate_param(t_param *obj)
+void	initiate_params(t_param *obj)
 {
-    if (!obj)
-        return (1); // null pointer arg error
-    obj->flags = 0;
-    obj->width = 0;
-    obj->precision_val = 0;
-    /*if (obj->length)
-    	free(obj->length);*/
-    obj->length = NULL;
-    obj->type = 0;
-    return (0);
+	if (!obj)
+		return ;
+	obj->flags = 0;
+	obj->width = 0;
+	obj->precision_val = 0;
+	obj->type = 0;
 }
