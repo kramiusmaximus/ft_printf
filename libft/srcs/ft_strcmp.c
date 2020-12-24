@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_itoa.c                                          :+:      :+:    :+:   */
+/*   ft_strcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pfelipa <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,15 +12,12 @@
 
 #include "libft.h"
 
-t_list				*ft_lstnew(void *content)
+int		ft_strcmp(const char *s1, const char *s2)
 {
-	t_list *node;
-
-	node = malloc(sizeof(t_list));
-	if (node)
+	while ((*s1) && (*s2) && (*s1 == *s2))
 	{
-		node->content = content;
-		node->next = NULL;
+		s1++;
+		s2++;
 	}
-	return (node);
+	return ((int)((unsigned char)*s1 - (unsigned char)*s2));
 }

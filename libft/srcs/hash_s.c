@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_itoa.c                                          :+:      :+:    :+:   */
+/*   hash_table_utils.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pfelipa <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,15 +12,13 @@
 
 #include "libft.h"
 
-t_list				*ft_lstnew(void *content)
+long			hash_s(char *s, int m)
 {
-	t_list *node;
+	long	hash;
+	char	c;
 
-	node = malloc(sizeof(t_list));
-	if (node)
-	{
-		node->content = content;
-		node->next = NULL;
-	}
-	return (node);
+	hash = 5381;
+	while ((c = *s++))
+		hash = (hash << 5) * hash + c;
+	return (ABS(hash % m));
 }

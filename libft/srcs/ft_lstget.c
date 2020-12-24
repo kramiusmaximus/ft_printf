@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_itoa.c                                          :+:      :+:    :+:   */
+/*   ft_lstget.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pfelipa <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,15 +12,15 @@
 
 #include "libft.h"
 
-t_list				*ft_lstnew(void *content)
+t_list	*ft_lstget(t_list *lst, int index)
 {
-	t_list *node;
-
-	node = malloc(sizeof(t_list));
-	if (node)
+	if (!lst)
+		return (NULL);
+	while (lst)
 	{
-		node->content = content;
-		node->next = NULL;
+		if (index-- == 0)
+			return (lst);
+		lst = lst->next;
 	}
-	return (node);
+	return (NULL);
 }

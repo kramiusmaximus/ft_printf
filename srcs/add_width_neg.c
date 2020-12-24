@@ -12,17 +12,18 @@
 
 #include "ft_printf.h"
 
-void add_width_neg(t_param *params, char *res, int len, int bufflen, char *tmp)
+void	add_width_neg(t_param *params, char *res, int len, int bufflen)
 {
-	char c;
-	int neg;
+	char	c;
+	int		neg;
 
 	c = ' ';
-	if ((params->flags & F_ZERO) && (!(params->flags & F_PRECISION) || params->precision_val < 0))
+	if ((params->flags & F_ZERO) &&
+		(!(params->flags & F_PRECISION) || params->precision_val < 0))
 		c = '0';
-	neg = *tmp == '-' && c == '0' ? 1 : 0;
+	neg = *params->tmp == '-' && c == '0' ? 1 : 0;
 	if (neg)
 		res[0] = '-';
 	ft_memset(res + neg, c, bufflen);
-	ft_memcpy(res + bufflen + neg, tmp + neg, len);
+	ft_memcpy(res + bufflen + neg, params->tmp + neg, len);
 }

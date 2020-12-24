@@ -16,8 +16,6 @@ char	*add_width(char *res, t_param *params)
 {
 	int		len;
 	int		bufflen;
-	char	*tmp;
-
 
 	if (!res || !params)
 		return (res);
@@ -27,12 +25,12 @@ char	*add_width(char *res, t_param *params)
 		return (res);
 	if (params->type == 'c' && !res[0])
 		bufflen--;
-	tmp = res;
+	params->tmp = res;
 	if (!(res = ft_calloc(ABS(params->width) + 1, 1)))
 		return (NULL);
 	if ((params->flags & F_MINUS) || params->width < 0)
-		add_width_pos(res, len, bufflen, tmp);
+		add_width_pos(params, res, len, bufflen);
 	else
-		add_width_neg(params, res, len, bufflen, tmp);
+		add_width_neg(params, res, len, bufflen);
 	return (res);
 }

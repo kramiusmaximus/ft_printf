@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_itoa.c                                          :+:      :+:    :+:   */
+/*   ft_lstremove.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pfelipa <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,15 +12,29 @@
 
 #include "libft.h"
 
-t_list				*ft_lstnew(void *content)
+void	ft_lstremove(t_list **lst, int index)
 {
-	t_list *node;
+	t_list *current;
+	t_list *prev;
 
-	node = malloc(sizeof(t_list));
-	if (node)
+	if (!lst || !*lst)
+		return ;
+	current = *lst;
+	if (!current->next || index == 0)
 	{
-		node->content = content;
-		node->next = NULL;
+		ft_lstdelone(current, (void (*)(void *)) ht_freeitem);
+		*lst = NULL;
 	}
-	return (node);
+	else
+	{
+		while (current)
+		{
+			if (index-- == 0)
+				break ;
+			prev = current;
+			current = current->next;
+		}
+		prev->next = current->next;
+		ft_lstdelone(current, (void (*)(void *)) ht_freeitem);
+	}
 }

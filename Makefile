@@ -3,7 +3,7 @@ SOURCES_DIRECTORY = srcs
 SOURCES = $(shell find $(SOURCES_DIRECTORY) -name '*.c')
 OBJECTS = $(patsubst %.c, %.o, $(SOURCES))
 HEADERS_DIRECTORY = ./includes ./libft/includes
-HEADERS_LIST = ft_printf.h
+HEADERS_LIST = ft_printf.h libft.h
 HEADERS = $(addprefix $(HEADERS_DIRECTORY), $(HEADERS_LIST))
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror
@@ -17,7 +17,7 @@ $(NAME):					${OBJECTS}
 							ranlib $(NAME)
 
 %.o: 						%.c
-							$(CC) $(CFLAGS) -Iincludes -Ilibft/includes -c -o $@ $<
+							$(CC) $(CFLAGS) $(addprefix -I, $(HEADERS_DIRECTORY)) -c -o $@ $<
 
 clean:
 							rm -f $(OBJECTS)

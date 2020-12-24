@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_itoa.c                                          :+:      :+:    :+:   */
+/*   ft_lstsearch.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pfelipa <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,15 +12,19 @@
 
 #include "libft.h"
 
-t_list				*ft_lstnew(void *content)
+int		ft_lstsearch(t_list *lst, void *content, int (*f)(void *, void *))
 {
-	t_list *node;
+	int index;
 
-	node = malloc(sizeof(t_list));
-	if (node)
+	index = 0;
+	if (!lst || !content || !f)
+		return (-1);
+	while (lst)
 	{
-		node->content = content;
-		node->next = NULL;
+		if (!f(lst->content, content))
+			return (index);
+		lst = lst->next;
+		index++;
 	}
-	return (node);
+	return (-1);
 }

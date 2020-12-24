@@ -12,8 +12,8 @@
 
 #include "ft_printf.h"
 
-void add_width_pos(char *res, int len, int bufflen, char *tmp)
+void	add_width_pos(t_param *params, char *res, int len, int bufflen)
 {
-	ft_memcpy(res, tmp, len);
+	ft_memcpy(res, params->tmp, len);
 	ft_memset(res + len, ' ', bufflen);
 }

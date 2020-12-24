@@ -20,4 +20,5 @@ void	initiate_params(t_param *obj)
 	obj->width = 0;
 	obj->precision_val = 0;
 	obj->type = 0;
+	obj->tmp = 0;
 }
