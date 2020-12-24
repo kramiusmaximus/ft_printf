@@ -30,6 +30,6 @@ char	*convert_percent(t_param *params)
 	tmp = res;
 	res = add_width(res, params);
 	if (tmp != res)
-		free(res);
+		free(tmp);
 	return (res);
 }
