@@ -10,8 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_PRINTF_FT_PRINTF_H
-# define FT_PRINTF_FT_PRINTF_H
+#ifndef FT_PRINTF_LIBFTPRINTF_H
+# define FT_PRINTF_LIBFTPRINTF_H
 # define F_MINUS       (0b00000001)
 # define F_PLUS        (0b00000010)
 # define F_SPACE       (0b00000100)
