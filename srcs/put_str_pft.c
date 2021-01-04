@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   add_width.c                                        :+:      :+:    :+:   */
+/*   put_str_pft.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pfelipa <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,25 +12,8 @@
 
 #include "libftprintf.h"
 
-char	*add_width(char *res, t_param *params)
+void	put_str_pft(char *s, int size)
 {
-	int		len;
-	int		bufflen;
-
-	if (!res || !params)
-		return (res);
-	len = ft_strlen(res);
-	if (!res[0] && params->type == 'c')
-		len++;
-	bufflen = ABS(params->width) - len;
-	if (bufflen < 1)
-		return (res);
-	params->tmp = res;
-	if (!(res = ft_calloc(ABS(params->width) + 1, 1)))
-		return (NULL);
-	if ((params->flags & F_MINUS) || params->width < 0)
-		add_width_pos(params, res, len, bufflen);
-	else
-		add_width_neg(params, res, len, bufflen);
-	return (res);
+	while (size-- > 0)
+		ft_putchar_fd(*s++, 1);
 }

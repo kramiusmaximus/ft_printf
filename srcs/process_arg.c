@@ -11,17 +11,24 @@
 /* ************************************************************************** */
 
 #include "libftprintf.h"
+#include <stdio.h>
 
 const char	*process_arg(t_param *params)
 {
-	char *res;
+	char	*res;
+	char	nc;
+	int		out_len;
 
+	nc = 0;
 	initiate_params(params);
 	parse(params);
 	if (!(res = process_params(params)))
 		return (NULL);
-	ft_putstr_fd(res, 1);
-	params->out += ft_strlen(res);
+	if (!*res && params->type == 'c')
+		nc++;
+	out_len = MAX(MAX(params->width, nc), ft_strlen(res));
+	put_str_pft(res, out_len);
+	params->out += out_len;
 	free(res);
 	return (params->s);
 }

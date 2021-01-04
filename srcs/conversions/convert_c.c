@@ -20,8 +20,6 @@ char	*convert_c(t_param *params)
 	if (!(res = ft_calloc(2, 1)))
 		return (NULL);
 	res[0] = va_arg(params->ap, int);
-	if (!res[0])
-		params->out++;
 	tmp = res;
 	if (params->flags & F_PRECISION)
 		res = add_precision_s(res, params);

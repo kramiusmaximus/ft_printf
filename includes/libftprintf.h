@@ -59,4 +59,5 @@ char			*ft_itoa_x(unsigned int n);
 char			*ft_itoa_xx(unsigned int n);
 char			*ft_itoa_u(unsigned int i);
 char			*ft_itoa_p(long n);
+void			put_str_pft(char *s, int size);
 #endif
