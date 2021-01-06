@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   hash_table_utils.c                                 :+:      :+:    :+:   */
+/*   ft_abs.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pfelipa <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,13 +12,7 @@
 
 #include "libft.h"
 
-long			hash_s(char *s, int m)
+int	ft_abs(int a)
 {
-	long	hash;
-	char	c;
-
-	hash = 5381;
-	while ((c = *s++))
-		hash = (hash << 5) * hash + c;
-	return (ft_abs(hash % m));
+	return (a < 0 ? -1 * a : a);
 }

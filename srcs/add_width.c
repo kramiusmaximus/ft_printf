@@ -22,11 +22,11 @@ char	*add_width(char *res, t_param *params)
 	len = ft_strlen(res);
 	if (!res[0] && params->type == 'c')
 		len++;
-	bufflen = ABS(params->width) - len;
+	bufflen = ft_abs(params->width) - len;
 	if (bufflen < 1)
 		return (res);
 	params->tmp = res;
-	if (!(res = ft_calloc(ABS(params->width) + 1, 1)))
+	if (!(res = ft_calloc(ft_abs(params->width) + 1, 1)))
 		return (NULL);
 	if ((params->flags & F_MINUS) || params->width < 0)
 		add_width_pos(params, res, len, bufflen);

@@ -26,7 +26,7 @@ const char	*process_arg(t_param *params)
 		return (NULL);
 	if (!*res && params->type == 'c')
 		nc++;
-	out_len = MAX(MAX(params->width, nc), ft_strlen(res));
+	out_len = ft_max(ft_max(params->width, nc), ft_strlen(res));
 	put_str_pft(res, out_len);
 	params->out += out_len;
 	free(res);

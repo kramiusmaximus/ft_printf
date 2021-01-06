@@ -28,7 +28,7 @@ int	ft_printf(const char *s, ...)
 		{
 			params.s++;
 			if (!(params.s = process_arg(&params)))
-				return (params.out);
+				return (-1);
 		}
 		else
 		{
